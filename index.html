@@ -33,6 +33,7 @@
 <script language="javascript">
 	const data = {
 		//const dm2_6= {0line:"Diamond", 1name:"DM2.6", 2pitch:2.6, 3brightness:1500, 4hpx:192, 5vpx:192, 6w:500, 7h:500, 8d:80, 9weight:5.76, 10maxpower:180, 11avgpower:90, 12scan, 13freshrate:, 14grayscale};
+		other_tile: ["Other", "Other", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA"],
 		ab0_9: ["Amber", "AB0.9", 0.9375, 700, 640, 360, 600, 337.5, 55, 8.5, 150, 75, 30, 1920, 16],
 		ab1_2: ["Amber", "AB1.2", 1.25, 800, 480, 270, 600, 337.5, 55, 8.5, 170, 85, 27, 3840, 16],
 		ab1_5: ["Amber", "AB1.5", 1.5625, 800, 384, 216, 600, 337.5, 55, 8.5, 180, 90, 18, 3840, 16],
@@ -201,6 +202,13 @@
 		var bpc_select = document.getElementById("bpc_select").getElementsByTagName("option");
 		var frame_rate_select = document.getElementById("frame_rate_select").getElementsByTagName("option");
 		var processor_select = document.getElementById("processor_select").getElementsByTagName("option");
+		var bandwidth_select = document.getElementById("bandwidth_select").getElementsByTagName("option");
+		var tile_width = document.getElementById("tile_width").value
+		var tile_height = document.getElementById("tile_height").value
+		console.log(bandwidth_select);
+		console.log(tile_width);
+		console.log(tile_height);
+
 		switch (brand_select) {
 			case "mvr":
 				bpc_select[3].disabled = true;
@@ -535,7 +543,7 @@
 </script>
 
 <body>
-	<h3 id="calc">Data Calculator for Processing Platforms v2.3 (Reference Only!)</h3>
+	<h3 id="calc">Data Calculator for Processing Platforms v3.0 (Reference Only!)</h3>
 
 	<!--<h4 id="calc_settings">Enter project settings</h4>-->
 
@@ -546,7 +554,7 @@
 				<td>Network Bit Depth</td>
 				<td>Frame Rate</td>
 				<td>Processor</td>
-
+				<td>Port Bandwidth</td>
 			</tr>
 			<td>
 
@@ -608,18 +616,25 @@
 				</select>
 
 			</td>
+			<td>
+				<select id="bandwidth_select" size="1" onclick="calculate()">
+					<option value="1" selected>1G</option>
+					<option value="2.5">2.5G</option>
+				</select>
+			</td>
 			<tr></tr>
 			<tr></tr>
 			<tr>
 				<td>Fixture</td>
+				<td>Fixture (W. x H.)</td>
 				<td>LED Screen QTY (W. x H.)</td>
 				<td>Panels per Port</td>
 				<td>Canvas Resolution (W. x H.)</td>
 			</tr>
 			<tr>
 				<td>
-
 					<select id="fixture_select" size="1" onclick="calculate()">
+						<option value="other_tile" selected>Other</option>
 						<option value="ab0_9">AB0.9</option>
 						<option value="ab1_2">AB1.2</option>
 						<option value="ab1_5">AB1.5</option>
@@ -635,7 +650,7 @@
 						<option value="bm5_matte">BM5-Matte</option>
 						<option value="bm5_glass">BM5-Glass</option>
 						<option value="bo3">BO3</option>
-						<option value="bp2" selected>BP2</option>
+						<option value="bp2">BP2</option>
 						<option value="bp2v2">BP2 V2</option>
 						<option value="bp3">BP3</option>
 						<option value="bp5" hidden>BP5</option>
@@ -663,6 +678,15 @@
 						<option value="v25_580">V25-580W</option>
 						<option value="v25_640">V25-640W</option>
 					</select>
+				</td>
+				<td>
+					<label for="tile_width">W</label>
+					<input id="tile_width" type="number" value="1" min="1" name="tile_Width" style="width: 4em"
+						onclick="calculate()">
+					x
+					<label for="tile_Height">H</label>
+					<input id="tile_height" type="number" value="1" min="1" name="tile_Height" style="width: 4em"
+						onclick="calculate()">
 
 				</td>
 				<td>
